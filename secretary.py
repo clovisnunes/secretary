@@ -3,19 +3,31 @@ import os
 from playsound import playsound
 from gtts import gTTS
 
+def adicionar_tarefa(tarefa):
+    global tasks
+    tasks = tasks + ', ' + tarefa
 
-tasks = 'Finish form fields, Compose post request from the form, Remodel database and backend.'
+def ler_tarefas():
+    global tasks
+    global tasknum
+    intro = 'Você tem ' + str(tasknum) + ' tarefas a fazer.'
+    finish = 'Anda logo porra.' # frases ofensivas aleatórias (lista)
+    total_phrase = intro + ' ' + tasks + ' ' + finish
+
+    full_speech = gTTS(text=total_phrase, lang='pt', tld='com.br', slow=False)
+    full_speech.save("fullspeech.mp3")
+
+    playsound('fullspeech.mp3')
+
+# exibir menu inicial
+
+tasks = 'Finalizar campos do cadastro, Refazer requisição POST, Remodelar banco de dados e backend.' # transformar em array, salvar e ler de arquivo
 tasknum = 3
-intro = 'You have ' + str(tasknum) + ' tasks.'
-finish = 'Do your fucking job.'
-
+intro = 'Olá Clóvis, você tem ' + str(tasknum) + ' tarefas a fazer.'
+finish = 'Anda logo porra.'
 total_phrase = intro + ' ' + tasks + ' ' + finish
 
-full_speech = gTTS(text=total_phrase, lang='en', slow=False)
-
-# Saving the converted audio in a mp3 file named
-# welcome 
+full_speech = gTTS(text=total_phrase, lang='pt', tld='com.br', slow=False)
 full_speech.save("fullspeech.mp3")
 
-# Playing the converted file
 playsound('fullspeech.mp3')
